@@ -6,7 +6,7 @@ A new library for a semi‑supervised learning method
 ## Table of Contents
 - [Features](#features)  
 - [Requirements](#requirements)  
-- [Installation](#installation)  
+- [Installation](#overview)  
 - [Quick Start](#quick-start)  
 - [Usage](#usage)  
 - [API Reference](#api-reference)  
@@ -47,6 +47,10 @@ Then:
         target_acc=0.80,  # early‑stop threshold
     )
     trainer.fit()  
+
+## Overview
+
+This algorithm implements an iterative pseudo‑labeling approach to semi‑supervised image classification: starting from a small pool of truly labeled images and a larger set of unlabeled images, it first trains a transfer‑learned model on the labeled subset, then repeatedly splits the unlabeled pool into chunks, uses the current model to assign “pseudo‑labels” to one chunk at a time, and retrains on the combination of true labels and pseudo‑labels for a fixed number of epochs. After each chunk update, it evaluates the model on a held-out validation set to track progress and stops early once a target validation accuracy is reached.
 
 ## Usage  
 You can customize hyperparameters via the constructor:  
